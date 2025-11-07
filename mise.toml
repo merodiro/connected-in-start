@@ -1,3 +1,4 @@
 [tools]
 node = "24"
 "npm:@antfu/ni" = "latest"
+uv = "latest"
