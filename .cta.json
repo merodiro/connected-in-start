@@ -1,0 +1,30 @@
+{
+  "initialized": true,
+  "mode": "file-router",
+  "projectName": "connected-in-start",
+  "typescript": true,
+  "tailwind": true,
+  "git": true,
+  "addOnOptions": {
+    "drizzle": {
+      "database": "postgresql"
+    }
+  },
+  "packageManager": "npm",
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": [
+    "compiler",
+    "db",
+    "drizzle",
+    "form",
+    "mcp",
+    "shadcn",
+    "t3env",
+    "table",
+    "start",
+    "store",
+    "tanstack-query",
+    "eslint"
+  ]
+}
