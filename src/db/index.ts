@@ -1,14 +1,12 @@
 import { config } from 'dotenv'
 
-import { drizzle } from 'drizzle-orm/node-postgres'
-import { Pool } from 'pg'
+import { drizzle } from 'drizzle-orm/neon-http'
+import { neon } from '@neondatabase/serverless'
 
 import * as schema from './schema.ts'
 import { env } from '@/env.ts'
 
 config()
 
-const pool = new Pool({
-  connectionString: env.DATABASE_URL,
-})
-export const db = drizzle(pool, { schema })
+const sql = neon(env.DATABASE_URL)
+export const db = drizzle(sql, { schema })
