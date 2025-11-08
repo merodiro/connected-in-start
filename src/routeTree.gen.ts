@@ -25,6 +25,7 @@ import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
 import { Route as DemoApiMcpTodosRouteImport } from './routes/demo/api.mcp-todos'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
@@ -110,6 +111,11 @@ const DemoApiMcpTodosRoute = DemoApiMcpTodosRouteImport.update({
   path: '/demo/api/mcp-todos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoStartSsrIndexRoute = DemoStartSsrIndexRouteImport.update({
   id: '/demo/start/ssr/',
   path: '/demo/start/ssr/',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/demo/store': typeof DemoStoreRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
@@ -163,6 +170,7 @@ export interface FileRoutesByTo {
   '/demo/store': typeof DemoStoreRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
@@ -186,6 +194,7 @@ export interface FileRoutesById {
   '/demo/store': typeof DemoStoreRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/demo/store'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/api/auth/$'
     | '/demo/api/mcp-todos'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/demo/store'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/api/auth/$'
     | '/demo/api/mcp-todos'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
@@ -254,6 +265,7 @@ export interface FileRouteTypes {
     | '/demo/store'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/api/auth/$'
     | '/demo/api/mcp-todos'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
@@ -277,6 +289,7 @@ export interface RootRouteChildren {
   DemoStoreRoute: typeof DemoStoreRoute
   DemoTableRoute: typeof DemoTableRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   DemoApiMcpTodosRoute: typeof DemoApiMcpTodosRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoApiTqTodosRoute: typeof DemoApiTqTodosRoute
@@ -404,6 +417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoApiMcpTodosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/start/ssr/': {
       id: '/demo/start/ssr/'
       path: '/demo/start/ssr'
@@ -445,6 +465,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoStoreRoute: DemoStoreRoute,
   DemoTableRoute: DemoTableRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
   DemoApiMcpTodosRoute: DemoApiMcpTodosRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoApiTqTodosRoute: DemoApiTqTodosRoute,

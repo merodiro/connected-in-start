@@ -5,6 +5,8 @@ export const env = createEnv({
   server: {
     SERVER_URL: z.string().url().optional(),
     DATABASE_URL: z.string().min(1),
+    BETTER_AUTH_SECRET: z.string().min(32),
+    BETTER_AUTH_URL: z.string().url().optional(),
   },
 
   /**
@@ -15,6 +17,7 @@ export const env = createEnv({
 
   client: {
     VITE_APP_TITLE: z.string().min(1).optional(),
+    VITE_BETTER_AUTH_URL: z.string().url().optional(),
   },
 
   /**
