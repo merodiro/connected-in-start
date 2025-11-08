@@ -1,0 +1,26 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		    "ghcr.io/roul/devcontainer-features/mise:1": {}
+	},
+	"waitFor": "onCreateCommand",
+  "updateContentCommand": "pnpm install",
+  "postCreateCommand": "",
+  "postAttachCommand": {
+    "server": "pnpm dev"
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "src/App.jsx"
+      ]
+    }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [3000]
+}

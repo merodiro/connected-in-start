@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
-    "@modelcontextprotocol/sdk": "^1.21.0",
+    "@modelcontextprotocol/sdk": "^1.21.1",
     "@neondatabase/serverless": "^1.0.2",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-select": "^2.2.6",
@@ -36,13 +36,13 @@
     "@tanstack/react-form": "^1.23.8",
     "@tanstack/react-query": "^5.90.7",
     "@tanstack/react-query-devtools": "^5.90.2",
-    "@tanstack/react-router": "^1.134.13",
-    "@tanstack/react-router-devtools": "^1.134.13",
-    "@tanstack/react-router-ssr-query": "^1.134.13",
-    "@tanstack/react-start": "^1.134.14",
+    "@tanstack/react-router": "^1.134.15",
+    "@tanstack/react-router-devtools": "^1.134.15",
+    "@tanstack/react-router-ssr-query": "^1.134.15",
+    "@tanstack/react-start": "^1.134.15",
     "@tanstack/react-store": "^0.8.0",
     "@tanstack/react-table": "^8.21.3",
-    "@tanstack/router-plugin": "^1.134.14",
+    "@tanstack/router-plugin": "^1.134.15",
     "@tanstack/store": "^0.8.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -79,5 +79,5 @@
     "vitest": "^4.0.8",
     "web-vitals": "^5.1.0"
   },
-  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
+  "packageManager": "pnpm@10.20.0"
 }
