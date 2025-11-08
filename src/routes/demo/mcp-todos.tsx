@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 type Todo = {
@@ -11,7 +11,7 @@ export const Route = createFileRoute('/demo/mcp-todos')({
 })
 
 function ORPCTodos() {
-  const [todos, setTodos] = useState<Todo[]>([])
+  const [todos, setTodos] = useState<Array<Todo>>([])
 
   useEffect(() => {
     const eventSource = new EventSource('/demo/api/mcp-todos')

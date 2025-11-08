@@ -6,9 +6,4 @@ export const authClient = createAuthClient({
   baseURL: env.VITE_BETTER_AUTH_URL || 'http://localhost:3000',
 })
 
-export const { 
-  useSession, 
-  signIn, 
-  signUp, 
-  signOut 
-} = authClient
+export const { useSession, signIn, signUp, signOut } = authClient

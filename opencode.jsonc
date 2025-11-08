@@ -52,11 +52,12 @@
     "bash": {
       "*": "ask",
       "git status": "allow",
-      "npm run typecheck": "allow",
-      "npm run lint": "allow",
-      "npm run format": "allow",
-      "npm run build": "allow",
+      "pnpm typecheck": "allow",
+      "pnpm lint": "allow",
+      "pnpm format": "allow",
+      "pnpm build": "allow",
       "npx eslint": "allow",
+      "pnpm dlx shadcn@latest add *": "allow",
     },
   },
 }

@@ -17,7 +17,7 @@
 - **Formatting**: No semicolons, single quotes, trailing commas
 - **Components**: PascalCase, export functions and types separately
 - **Types**: Use `interface` for object shapes, `type` for unions/utilities
-- **DB**: Drizzle ORM with PostgreSQL, schema in `src/db/schema.ts`
+- **DB**: Drizzle ORM with PostgreSQL, schema in `src/db/schema`
 - **Env**: Use `@t3-oss/env-core` with Zod validation
 - **UI**: shadcn/ui components with Radix UI + Tailwind CSS, use `cn()` utility for classes
 - **Error handling**: Use Zod for validation, proper TypeScript types
