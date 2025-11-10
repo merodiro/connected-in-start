@@ -24,7 +24,9 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 const loginSchema = z.object({
-  email: z.email({ message: 'Please enter a valid email address' }),
+  emailOrUsername: z
+    .string()
+    .min(1, { message: 'Email or username is required' }),
   password: z
     .string()
     .min(6, { message: 'Password must be at least 6 characters' }),
@@ -45,7 +47,7 @@ export function LoginForm({
 
   const form = useForm({
     defaultValues: {
-      email: '',
+      emailOrUsername: '',
       password: '',
     },
     validators: {
@@ -55,11 +57,18 @@ export function LoginForm({
     onSubmit: async ({ value }) => {
       try {
         setError(null)
-        const result = await authClient.signIn.email({
-          email: value.email,
-          password: value.password,
-          callbackURL: '/',
-        })
+        const isEmail = value.emailOrUsername.includes('@')
+        const result = isEmail
+          ? await authClient.signIn.email({
+              email: value.emailOrUsername,
+              password: value.password,
+              callbackURL: '/',
+            })
+          : await authClient.signIn.username({
+              username: value.emailOrUsername,
+              password: value.password,
+              callbackURL: '/',
+            })
 
         if (result.error) {
           setError(result.error.message || 'Login failed')
@@ -77,7 +86,7 @@ export function LoginForm({
       <CardHeader className="text-center">
         <CardTitle className="text-xl">Welcome back</CardTitle>
         <CardDescription>
-          Enter your email and password to sign in
+          Enter your email or username and password to sign in
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -98,22 +107,24 @@ export function LoginForm({
           )}
           <FieldGroup>
             <form.Field
-              name="email"
+              name="emailOrUsername"
               children={(field) => {
                 const isInvalid =
                   field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Email or Username
+                    </FieldLabel>
                     <Input
                       id={field.name}
-                      type="email"
+                      type="text"
                       name={field.name}
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder="Enter your email"
+                      placeholder="Enter your email or username"
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />

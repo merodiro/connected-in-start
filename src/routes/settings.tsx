@@ -72,6 +72,16 @@ function Settings() {
                     {session.user.name}
                   </p>
                 </div>
+                {session.user.username && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-700">
+                      Username
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      @{session.user.username}
+                    </p>
+                  </div>
+                )}
                 <div>
                   <label className="text-sm font-medium text-gray-700">
                     Email

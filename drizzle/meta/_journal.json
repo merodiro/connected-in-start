@@ -15,6 +15,13 @@
       "when": 1762597867736,
       "tag": "0001_remarkable_xorn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1762809340534,
+      "tag": "0002_nervous_robbie_robertson",
+      "breakpoints": true
     }
   ]
 }

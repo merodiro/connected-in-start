@@ -68,6 +68,11 @@ function Dashboard() {
                 <p>
                   <strong>Name:</strong> {session.user.name}
                 </p>
+                {session.user.username && (
+                  <p>
+                    <strong>Username:</strong> @{session.user.username}
+                  </p>
+                )}
                 <p>
                   <strong>Email:</strong> {session.user.email}
                 </p>

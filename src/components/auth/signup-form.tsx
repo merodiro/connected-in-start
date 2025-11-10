@@ -26,6 +26,14 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 const signupSchema = z
   .object({
     name: z.string().min(1, { message: 'Name is required' }),
+    username: z
+      .string()
+      .min(3, { message: 'Username must be at least 3 characters' })
+      .max(30, { message: 'Username must be less than 30 characters' })
+      .regex(/^[a-zA-Z0-9_-]+$/, {
+        message:
+          'Username can only contain letters, numbers, underscores, and hyphens',
+      }),
     email: z
       .string()
       .min(1, { message: 'Email is required' })
@@ -53,6 +61,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const form = useForm({
     defaultValues: {
       name: '',
+      username: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -69,6 +78,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           email: value.email,
           password: value.password,
           name: value.name,
+          username: value.username,
         })
 
         if (result.error) {
@@ -124,6 +134,32 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                       placeholder="Enter your full name"
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                )
+              }}
+            />
+
+            <form.Field
+              name="username"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      type="text"
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={isInvalid}
+                      placeholder="Choose a username"
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
