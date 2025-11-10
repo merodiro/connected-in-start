@@ -43,6 +43,14 @@
         "connected-in-start",
       ],
     },
+    "deepwiki": {
+      "type": "remote",
+      "url": "https://mcp.deepwiki.com/mcp",
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+    },
     // "gitbutler": {
     //   "type": "local",
     //   "command": ["but", "mcp"],

@@ -32,10 +32,13 @@
 - Use `replace_symbol_body`, `insert_after_symbol`, `insert_before_symbol` for precise edits
 - Use `rename_symbol` for refactoring across the codebase
 - Use memories for large tasks to track progress and context
+- Split large tasks to multiple agents for parallel work
 - Use thinking tools (`think_about_collected_information`, `think_about_task_adherence`, `think_about_whether_you_are_done`) to maintain focus
 - Use ESLint MCP tool for linting instead of `pnpm lint`
 - Use shadcn MCP to add new UI components
 - Use `context7` for looking up documentation instead of assuming library behavior
+- Use `deepwiki` for GitHub repository documentation and questions
+- Use `exa_web_search_exa` and `exa_get_code_context_exa` for web searches and code examples
 - Always run `typecheck` after making changes
 
 ## Tool Calling
