@@ -71,7 +71,7 @@ function AddressForm() {
                 if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
                   return 'Invalid email address'
                 }
-                return undefined
+                return
               },
             }}
           >
@@ -85,7 +85,7 @@ function AddressForm() {
                 if (!value || value.trim().length === 0) {
                   return 'Street address is required'
                 }
-                return undefined
+                return
               },
             }}
           >
@@ -100,7 +100,7 @@ function AddressForm() {
                   if (!value || value.trim().length === 0) {
                     return 'City is required'
                   }
-                  return undefined
+                  return
                 },
               }}
             >
@@ -113,7 +113,7 @@ function AddressForm() {
                   if (!value || value.trim().length === 0) {
                     return 'State is required'
                   }
-                  return undefined
+                  return
                 },
               }}
             >
@@ -129,7 +129,7 @@ function AddressForm() {
                   if (!/^\d{5}(-\d{4})?$/.test(value)) {
                     return 'Invalid zip code format'
                   }
-                  return undefined
+                  return
                 },
               }}
             >
@@ -144,7 +144,7 @@ function AddressForm() {
                 if (!value || value.trim().length === 0) {
                   return 'Country is required'
                 }
-                return undefined
+                return
               },
             }}
           >
@@ -179,7 +179,7 @@ function AddressForm() {
                 ) {
                   return 'Invalid phone number format'
                 }
-                return undefined
+                return
               },
             }}
           >

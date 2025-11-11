@@ -1,9 +1,10 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { useState } from 'react'
 import { GalleryVerticalEnd } from 'lucide-react'
+import { useState } from 'react'
+
+import { ForgotPasswordForm } from '@/components/auth/forgot-password-form'
 import { LoginForm } from '@/components/auth/login-form'
 import { SignupForm } from '@/components/auth/signup-form'
-import { ForgotPasswordForm } from '@/components/auth/forgot-password-form'
 
 type AuthView = 'login' | 'signup' | 'forgot-password'
 
@@ -11,14 +12,14 @@ function AuthComponent() {
   const [currentView, setCurrentView] = useState<AuthView>('login')
   const navigate = useNavigate({ from: '/auth' })
 
-  const handleSuccess = () => {
+  const handleSuccess = async () => {
     // Redirect to home page using TanStack Router
-    navigate({ to: '/' })
+    await navigate({ to: '/' })
   }
 
   const renderCurrentForm = () => {
     switch (currentView) {
-      case 'login':
+      case 'login': {
         return (
           <LoginForm
             onSuccess={handleSuccess}
@@ -26,22 +27,26 @@ function AuthComponent() {
             onForgotPassword={() => setCurrentView('forgot-password')}
           />
         )
-      case 'signup':
+      }
+      case 'signup': {
         return (
           <SignupForm
             onSuccess={handleSuccess}
             onSwitchToLogin={() => setCurrentView('login')}
           />
         )
-      case 'forgot-password':
+      }
+      case 'forgot-password': {
         return (
           <ForgotPasswordForm
             onSuccess={handleSuccess}
             onBackToLogin={() => setCurrentView('login')}
           />
         )
-      default:
+      }
+      default: {
         return null
+      }
     }
   }
 

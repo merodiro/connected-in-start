@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import Messages from './demo.messages'
 import { useChat, useMessages } from '@/hooks/demo.useChat'
+
+import Messages from './demo.messages'
 
 export default function ChatArea() {
   const { sendMessage } = useChat()
@@ -12,7 +13,7 @@ export default function ChatArea() {
   const [user, setUser] = useState('Alice')
 
   const postMessage = () => {
-    if (message.trim().length) {
+    if (message.trim().length > 0) {
       sendMessage(message, user)
       setMessage('')
     }

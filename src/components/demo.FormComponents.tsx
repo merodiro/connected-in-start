@@ -2,13 +2,13 @@ import { useStore } from '@tanstack/react-form'
 
 import { useFieldContext, useFormContext } from '@/hooks/demo.form-context'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea as ShadcnTextarea } from '@/components/ui/textarea'
-import * as ShadcnSelect from '@/components/ui/select'
-import { Slider as ShadcnSlider } from '@/components/ui/slider'
-import { Switch as ShadcnSwitch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { Label } from './ui/label'
+import * as ShadcnSelect from './ui/select'
+import { Slider as ShadcnSlider } from './ui/slider'
+import { Switch as ShadcnSwitch } from './ui/switch'
+import { Textarea as ShadcnTextarea } from './ui/textarea'
 
 export function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext()

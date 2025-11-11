@@ -1,18 +1,10 @@
-import { useState } from 'react'
-import { AlertCircleIcon } from 'lucide-react'
 import { useForm } from '@tanstack/react-form'
+import { AlertCircleIcon } from 'lucide-react'
+import { useState } from 'react'
 import { z } from 'zod'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '../ui/field'
-import { authClient } from '@/lib/auth-client'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
@@ -21,7 +13,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { authClient } from '@/lib/auth-client'
 
 const loginSchema = z.object({
   emailOrUsername: z
@@ -32,7 +32,7 @@ const loginSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters' }),
 })
 
-interface LoginFormProps {
+type LoginFormProps = {
   onSuccess?: () => void
   onSwitchToSignup?: () => void
   onForgotPassword?: () => void
@@ -71,12 +71,16 @@ export function LoginForm({
             })
 
         if (result.error) {
-          setError(result.error.message || 'Login failed')
+          setError(result.error.message ?? 'Login failed')
         } else {
           onSuccess?.()
         }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
+      } catch (error_) {
+        setError(
+          error_ instanceof Error
+            ? error_.message
+            : 'An unexpected error occurred',
+        )
       }
     },
   })
@@ -91,10 +95,10 @@ export function LoginForm({
       </CardHeader>
       <CardContent>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault()
             e.stopPropagation()
-            form.handleSubmit()
+            await form.handleSubmit()
           }}
           id="login-form"
         >

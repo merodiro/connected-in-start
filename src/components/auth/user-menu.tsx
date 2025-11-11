@@ -1,3 +1,5 @@
+import { useNavigate } from '@tanstack/react-router'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -11,6 +13,7 @@ import { signOut, useSession } from '@/lib/auth-client'
 
 export function UserMenu() {
   const { data: session, isPending } = useSession()
+  const navigate = useNavigate()
 
   if (isPending) {
     return <div className="h-8 w-8 rounded-full bg-gray-200 animate-pulse" />
@@ -24,7 +27,7 @@ export function UserMenu() {
 
   const handleSignOut = async () => {
     await signOut()
-    window.location.href = '/auth'
+    await navigate({ to: '/auth' })
   }
 
   return (
@@ -32,12 +35,8 @@ export function UserMenu() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user.image ?? undefined} alt={user.name ?? ''} />
-            <AvatarFallback>
-              {user.name?.charAt(0).toUpperCase() ??
-                user.email?.charAt(0).toUpperCase() ??
-                'U'}
-            </AvatarFallback>
+            <AvatarImage src={user.image ?? undefined} alt={user.name} />
+            <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

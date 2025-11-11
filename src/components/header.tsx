@@ -1,6 +1,4 @@
 import { Link } from '@tanstack/react-router'
-
-import { useState } from 'react'
 import {
   ChevronDown,
   ChevronRight,
@@ -16,7 +14,9 @@ import {
   Webhook,
   X,
 } from 'lucide-react'
-import { UserMenu } from '@/components/auth/user-menu'
+import { useState } from 'react'
+
+import { UserMenu } from './auth/user-menu'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)

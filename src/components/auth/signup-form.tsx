@@ -1,18 +1,10 @@
-import { useState } from 'react'
-import { AlertCircleIcon } from 'lucide-react'
 import { useForm } from '@tanstack/react-form'
+import { AlertCircleIcon } from 'lucide-react'
+import { useState } from 'react'
 import { z } from 'zod'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '../ui/field'
-import { authClient } from '@/lib/auth-client'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
@@ -21,7 +13,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { authClient } from '@/lib/auth-client'
 
 const signupSchema = z
   .object({
@@ -35,9 +35,8 @@ const signupSchema = z
           'Username can only contain letters, numbers, underscores, and hyphens',
       }),
     email: z
-      .string()
-      .min(1, { message: 'Email is required' })
-      .email({ message: 'Invalid email address' }),
+      .email({ message: 'Invalid email address' })
+      .min(1, { message: 'Email is required' }),
     password: z
       .string()
       .min(6, { message: 'Password must be at least 6 characters' }),
@@ -45,12 +44,12 @@ const signupSchema = z
       .string()
       .min(1, { message: 'Please confirm your password' }),
   })
-  .refine((data: any) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ['confirmPassword'],
   })
 
-interface SignupFormProps {
+type SignupFormProps = {
   onSuccess?: () => void
   onSwitchToLogin?: () => void
 }
@@ -82,12 +81,16 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         })
 
         if (result.error) {
-          setError(result.error.message || 'Signup failed')
+          setError(result.error.message ?? 'Signup failed')
         } else {
           onSuccess?.()
         }
-      } catch (err) {
-        setError('An unexpected error occurred')
+      } catch (error_) {
+        setError(
+          error_ instanceof Error
+            ? error_.message
+            : 'An unexpected error occurred',
+        )
       }
     },
   })
@@ -102,10 +105,10 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </CardHeader>
       <CardContent>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault()
             e.stopPropagation()
-            form.handleSubmit()
+            await form.handleSubmit()
           }}
           id="signup-form"
         >

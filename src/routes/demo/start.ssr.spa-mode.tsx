@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
+
 import { getPunkSongs } from '@/data/demo.punk-songs'
 
 export const Route = createFileRoute('/demo/start/ssr/spa-mode')({
@@ -13,7 +14,7 @@ function RouteComponent() {
   >([])
 
   useEffect(() => {
-    getPunkSongs().then(setPunkSongs)
+    getPunkSongs().then(setPunkSongs).catch(console.error)
   }, [])
 
   return (

@@ -1,7 +1,6 @@
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js'
-
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import type { JSONRPCMessage } from '@modelcontextprotocol/sdk/types.js'
+import { type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { type JSONRPCMessage } from '@modelcontextprotocol/sdk/types.js'
 
 export async function handleMcpRequest(
   request: Request,
@@ -44,7 +43,7 @@ export async function handleMcpRequest(
       {
         jsonrpc: '2.0',
         error: {
-          code: -32603,
+          code: -32_603,
           message: 'Internal server error',
           data: error instanceof Error ? error.message : String(error),
         },

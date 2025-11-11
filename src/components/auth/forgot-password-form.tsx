@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import { MailIcon } from 'lucide-react'
 import { useForm } from '@tanstack/react-form'
+import { MailIcon } from 'lucide-react'
+import { useState } from 'react'
 import { z } from 'zod'
 
-import { Field, FieldError, FieldGroup, FieldLabel } from '../ui/field'
-import { authClient } from '@/lib/auth-client'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
@@ -15,16 +13,22 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { authClient } from '@/lib/auth-client'
 
 const forgotPasswordSchema = z.object({
   email: z
-    .string()
-    .min(1, { message: 'Email is required' })
-    .email({ message: 'Invalid email address' }),
+    .email({ message: 'Invalid email address' })
+    .min(1, { message: 'Email is required' }),
 })
 
-interface ForgotPasswordFormProps {
+type ForgotPasswordFormProps = {
   onSuccess?: () => void
   onBackToLogin?: () => void
 }
@@ -55,15 +59,19 @@ export function ForgotPasswordForm({
         })
 
         if (result.error) {
-          setError(result.error.message || 'Failed to send reset email')
+          setError(result.error.message ?? 'Failed to send reset email')
         } else {
           setSuccess(true)
           setTimeout(() => {
             onSuccess?.()
           }, 2000)
         }
-      } catch (err) {
-        setError('An unexpected error occurred')
+      } catch (error_) {
+        setError(
+          error_ instanceof Error
+            ? error_.message
+            : 'An unexpected error occurred',
+        )
       }
     },
   })
@@ -108,10 +116,10 @@ export function ForgotPasswordForm({
         </CardHeader>
         <CardContent>
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
               e.stopPropagation()
-              form.handleSubmit()
+              await form.handleSubmit()
             }}
             id="forgot-password-form"
           >

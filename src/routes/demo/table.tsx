@@ -1,6 +1,11 @@
-import React from 'react'
+import { type RankingInfo, compareItems, rankItem  } from '@tanstack/match-sorter-utils'
 import { createFileRoute } from '@tanstack/react-router'
 import {
+  type Column,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type FilterFn,
+  type SortingFn,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -9,28 +14,20 @@ import {
   sortingFns,
   useReactTable,
 } from '@tanstack/react-table'
-import { compareItems, rankItem } from '@tanstack/match-sorter-utils'
+import { useEffect, useMemo, useReducer, useState } from 'react'
 
-import type {
-  Column,
-  ColumnDef,
-  ColumnFiltersState,
-  FilterFn,
-  SortingFn,
-} from '@tanstack/react-table'
-import type { RankingInfo } from '@tanstack/match-sorter-utils'
-
-import type { Person } from '@/data/demo-table-data'
-import { makeData } from '@/data/demo-table-data'
+import { type Person, makeData  } from '@/data/demo-table-data'
 
 export const Route = createFileRoute('/demo/table')({
   component: TableDemo,
 })
 
 declare module '@tanstack/react-table' {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface FilterFns {
     fuzzy: FilterFn<unknown>
   }
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface FilterMeta {
     itemRank: RankingInfo
   }
@@ -67,14 +64,12 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
 }
 
 function TableDemo() {
-  const rerender = React.useReducer(() => ({}), {})[1]
+  const rerender = useReducer(() => ({}), {})[1]
 
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
-  )
-  const [globalFilter, setGlobalFilter] = React.useState('')
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [globalFilter, setGlobalFilter] = useState('')
 
-  const columns = React.useMemo<Array<ColumnDef<Person, any>>>(
+  const columns = useMemo<Array<ColumnDef<Person, any>>>(
     () => [
       {
         accessorKey: 'id',
@@ -105,7 +100,7 @@ function TableDemo() {
     [],
   )
 
-  const [data, setData] = React.useState<Array<Person>>(() => makeData(5_000))
+  const [data, setData] = useState<Array<Person>>(() => makeData(5000))
   const refreshData = () => setData((_old) => makeData(50_000)) // stress test
 
   const table = useReactTable({
@@ -131,11 +126,12 @@ function TableDemo() {
   })
 
   // apply the fuzzy sort if the fullName column is being filtered
-  React.useEffect(() => {
-    if (table.getState().columnFilters[0]?.id === 'fullName') {
-      if (table.getState().sorting[0]?.id !== 'fullName') {
-        table.setSorting([{ id: 'fullName', desc: false }])
-      }
+  useEffect(() => {
+    if (
+      table.getState().columnFilters[0]?.id === 'fullName' &&
+      table.getState().sorting[0]?.id !== 'fullName'
+    ) {
+      table.setSorting([{ id: 'fullName', desc: false }])
     }
   }, [table.getState().columnFilters[0]?.id])
 
@@ -311,7 +307,7 @@ function TableDemo() {
   )
 }
 
-function Filter({ column }: { column: Column<any, unknown> }) {
+function Filter({ column }: { column: Column<any> }) {
   const columnFilterValue = column.getFilterValue()
 
   return (
@@ -336,13 +332,13 @@ function DebouncedInput({
   onChange: (value: string | number) => void
   debounce?: number
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-  const [value, setValue] = React.useState(initialValue)
+  const [value, setValue] = useState(initialValue)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValue(initialValue)
   }, [initialValue])
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       onChange(value)
     }, debounce)
