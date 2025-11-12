@@ -1,4 +1,5 @@
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { FormDevtools } from '@tanstack/react-form-devtools'
 import { type QueryClient } from '@tanstack/react-query'
 import {
   HeadContent,
@@ -62,6 +63,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             },
             StoreDevtools,
             TanStackQueryDevtools,
+            {
+              name: 'TanStack Form',
+              render: <FormDevtools />,
+            },
           ]}
         />
         <Scripts />

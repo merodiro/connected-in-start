@@ -1,7 +1,7 @@
-import { useForm } from '@tanstack/react-form'
+import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { AlertCircleIcon } from 'lucide-react'
 import { useState } from 'react'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -26,7 +26,8 @@ import { authClient } from '@/lib/auth-client'
 const loginSchema = z.object({
   emailOrUsername: z
     .string()
-    .min(1, { message: 'Email or username is required' }),
+    .nonempty({ message: 'Email or username is required' })
+    .min(3, { message: 'Email or username must be at least 3 characters' }),
   password: z
     .string()
     .min(6, { message: 'Password must be at least 6 characters' }),
@@ -50,9 +51,9 @@ export function LoginForm({
       emailOrUsername: '',
       password: '',
     },
+    validationLogic: revalidateLogic(),
     validators: {
-      onChange: loginSchema,
-      onSubmit: loginSchema,
+      onDynamic: loginSchema,
     },
     onSubmit: async ({ value }) => {
       try {
@@ -75,10 +76,10 @@ export function LoginForm({
         } else {
           onSuccess?.()
         }
-      } catch (error_) {
+      } catch (error) {
         setError(
-          error_ instanceof Error
-            ? error_.message
+          error instanceof Error
+            ? error.message
             : 'An unexpected error occurred',
         )
       }

@@ -1,7 +1,7 @@
 import { createCollection, localOnlyCollectionOptions } from '@tanstack/db'
 import { createFileRoute } from '@tanstack/react-router'
 import { json } from '@tanstack/react-start'
-import { z } from 'zod'
+import * as z from 'zod'
 
 const IncomingMessageSchema = z.object({
   user: z.string(),

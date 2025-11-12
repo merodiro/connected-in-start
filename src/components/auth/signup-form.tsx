@@ -1,7 +1,7 @@
-import { useForm } from '@tanstack/react-form'
+import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { AlertCircleIcon } from 'lucide-react'
 import { useState } from 'react'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -28,12 +28,28 @@ const signupSchema = z
     name: z.string().min(1, { message: 'Name is required' }),
     username: z
       .string()
-      .min(3, { message: 'Username must be at least 3 characters' })
-      .max(30, { message: 'Username must be less than 30 characters' })
+      .min(3, {
+        message: 'Username must be at least 3 characters',
+        abort: true,
+      })
+      .max(30, {
+        message: 'Username must be less than 30 characters',
+        abort: true,
+      })
       .regex(/^[a-zA-Z0-9_-]+$/, {
         message:
           'Username can only contain letters, numbers, underscores, and hyphens',
-      }),
+        abort: true,
+      })
+      .refine(
+        async (username) => {
+          const res = await authClient.isUsernameAvailable({ username })
+          return res.data?.available ?? false
+        },
+        {
+          message: 'Username is already taken',
+        },
+      ),
     email: z
       .email({ message: 'Invalid email address' })
       .min(1, { message: 'Email is required' }),
@@ -47,6 +63,12 @@ const signupSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ['confirmPassword'],
+    // run if password & confirmPassword are valid
+    when(payload) {
+      return signupSchema
+        .pick({ password: true, confirmPassword: true })
+        .safeParse(payload.value).success
+    },
   })
 
 type SignupFormProps = {
@@ -65,9 +87,10 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       password: '',
       confirmPassword: '',
     },
+    validationLogic: revalidateLogic(),
     validators: {
-      onChange: signupSchema,
-      onSubmit: signupSchema,
+      onDynamicAsyncDebounceMs: 300,
+      onDynamicAsync: signupSchema,
     },
     onSubmit: async ({ value }) => {
       setError(null)
@@ -85,10 +108,10 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         } else {
           onSuccess?.()
         }
-      } catch (error_) {
+      } catch (error) {
         setError(
-          error_ instanceof Error
-            ? error_.message
+          error instanceof Error
+            ? error.message
             : 'An unexpected error occurred',
         )
       }

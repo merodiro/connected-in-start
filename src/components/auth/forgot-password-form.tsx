@@ -1,7 +1,7 @@
-import { useForm } from '@tanstack/react-form'
+import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { MailIcon } from 'lucide-react'
 import { useState } from 'react'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -44,9 +44,9 @@ export function ForgotPasswordForm({
     defaultValues: {
       email: '',
     },
+    validationLogic: revalidateLogic(),
     validators: {
-      onChange: forgotPasswordSchema,
-      onSubmit: forgotPasswordSchema,
+      onDynamic: forgotPasswordSchema,
     },
     onSubmit: async ({ value }) => {
       setError(null)
@@ -66,10 +66,10 @@ export function ForgotPasswordForm({
             onSuccess?.()
           }, 2000)
         }
-      } catch (error_) {
+      } catch (error) {
         setError(
-          error_ instanceof Error
-            ? error_.message
+          error instanceof Error
+            ? error.message
             : 'An unexpected error occurred',
         )
       }
