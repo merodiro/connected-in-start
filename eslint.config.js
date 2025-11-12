@@ -78,6 +78,7 @@ export default defineConfig(
         },
       ],
       'perfectionist/sort-imports': ['error'],
+      'perfectionist/sort-exports': ['error'],
       'unicorn/prevent-abbreviations': 'off',
       'unicorn/no-null': 'off',
       'unicorn/prefer-global-this': 'off',
