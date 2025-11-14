@@ -41,6 +41,8 @@
         "ide-assistant",
         "--project",
         "connected-in-start",
+        "--enable-web-dashboard",
+        "false",
       ],
     },
     "deepwiki": {
