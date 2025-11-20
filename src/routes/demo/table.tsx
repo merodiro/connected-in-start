@@ -1,4 +1,8 @@
-import { type RankingInfo, compareItems, rankItem  } from '@tanstack/match-sorter-utils'
+import {
+  type RankingInfo,
+  compareItems,
+  rankItem,
+} from '@tanstack/match-sorter-utils'
 import { createFileRoute } from '@tanstack/react-router'
 import {
   type Column,
@@ -16,7 +20,7 @@ import {
 } from '@tanstack/react-table'
 import { useEffect, useMemo, useReducer, useState } from 'react'
 
-import { type Person, makeData  } from '@/data/demo-table-data'
+import { type Person, makeData } from '@/data/demo-table-data'
 
 export const Route = createFileRoute('/demo/table')({
   component: TableDemo,
