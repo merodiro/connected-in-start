@@ -56,6 +56,10 @@ export default defineConfig(
         'error',
         { ignoreArrowShorthand: true },
       ],
+      '@typescript-eslint/restrict-template-expressions': [
+        'error',
+        { allowNumber: true },
+      ],
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -75,6 +79,18 @@ export default defineConfig(
             arguments: false,
             attributes: false,
           },
+        },
+      ],
+      '@typescript-eslint/only-throw-error': [
+        'error',
+        {
+          allow: [
+            {
+              from: 'package',
+              package: '@tanstack/router-core',
+              name: 'Redirect',
+            },
+          ],
         },
       ],
       'perfectionist/sort-imports': ['error'],

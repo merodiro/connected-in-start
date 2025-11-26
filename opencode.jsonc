@@ -13,18 +13,6 @@
       "type": "local",
       "command": ["npx", "-y", "@eslint/mcp@latest"],
     },
-    // "sequential-thinking": {
-    //   "type": "local",
-    //   "command": [
-    //     "npx",
-    //     "-y",
-    //     "@modelcontextprotocol/server-sequential-thinking",
-    //   ],
-    // },
-    // "memory": {
-    //   "type": "local",
-    //   "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
-    // },
     "shadcn": {
       "type": "local",
       "command": ["npx", "-y", "shadcn@latest", "mcp"],
@@ -57,6 +45,11 @@
     //   "type": "local",
     //   "command": ["but", "mcp"],
     // },
+    "Better Auth": {
+      "type": "remote",
+      "url": "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp",
+      "enabled": true,
+    },
   },
   "permission": {
     "bash": {

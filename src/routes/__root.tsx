@@ -10,6 +10,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 
 import Header from '@/components/header'
 import { ThemeObserver } from '@/components/theme-observer'
+import { Toaster } from '@/components/ui/sonner'
 import TanStackQueryDevtools from '@/integrations/tanstack-query/devtools'
 import StoreDevtools from '@/lib/demo-store-devtools'
 import appCss from '@/styles.css?url'
@@ -71,6 +72,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             },
           ]}
         />
+        <Toaster />
         <Scripts />
       </body>
     </html>

@@ -36,6 +36,7 @@
 - Use thinking tools (`think_about_collected_information`, `think_about_task_adherence`, `think_about_whether_you_are_done`) to maintain focus
 - Use ESLint MCP tool for linting instead of `pnpm lint`
 - Use shadcn MCP to add new UI components
+- Use Better Auth MCP for authentication-related queries and documentation
 - Use `context7` for looking up documentation instead of assuming library behavior
 - Use `deepwiki` for GitHub repository documentation and questions
 - Use `exa_web_search_exa` and `exa_get_code_context_exa` for web searches and code examples

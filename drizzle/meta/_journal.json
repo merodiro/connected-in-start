@@ -22,6 +22,20 @@
       "when": 1762809340534,
       "tag": "0002_nervous_robbie_robertson",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1763660808741,
+      "tag": "0003_typical_abomination",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1764191999961,
+      "tag": "0004_ancient_shadowcat",
+      "breakpoints": true
     }
   ]
 }
