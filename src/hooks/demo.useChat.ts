@@ -4,10 +4,7 @@ import { useEffect, useRef } from 'react'
 
 import { type Message, messagesCollection } from '@/db-collections'
 
-function useStreamConnection(
-  url: string,
-  collection: Collection<any, any, any>,
-) {
+function useStreamConnection(url: string, collection: Collection<any, any, any>) {
   const loadedRef = useRef(false)
 
   useEffect(() => {

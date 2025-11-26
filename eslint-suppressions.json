@@ -147,9 +147,6 @@
   "src/routes/mcp.ts": {
     "@typescript-eslint/no-confusing-void-expression": {
       "count": 1
-    },
-    "@typescript-eslint/no-unsafe-argument": {
-      "count": 1
     }
   },
   "src/utils/mcp-handler.ts": {

@@ -13,13 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { authClient } from '@/lib/auth-client'
 
@@ -37,8 +31,7 @@ const signupSchema = z
         abort: true,
       })
       .regex(/^[a-zA-Z0-9_-]+$/, {
-        message:
-          'Username can only contain letters, numbers, underscores, and hyphens',
+        message: 'Username can only contain letters, numbers, underscores, and hyphens',
         abort: true,
       })
       .refine(
@@ -50,24 +43,17 @@ const signupSchema = z
           message: 'Username is already taken',
         },
       ),
-    email: z
-      .email({ message: 'Invalid email address' })
-      .min(1, { message: 'Email is required' }),
-    password: z
-      .string()
-      .min(6, { message: 'Password must be at least 6 characters' }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: 'Please confirm your password' }),
+    email: z.email({ message: 'Invalid email address' }).min(1, { message: 'Email is required' }),
+    password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
+    confirmPassword: z.string().min(1, { message: 'Please confirm your password' }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ['confirmPassword'],
     // run if password & confirmPassword are valid
     when(payload) {
-      return signupSchema
-        .pick({ password: true, confirmPassword: true })
-        .safeParse(payload.value).success
+      return signupSchema.pick({ password: true, confirmPassword: true }).safeParse(payload.value)
+        .success
     },
   })
 
@@ -109,11 +95,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onSuccess?.()
         }
       } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred',
-        )
+        setError(error instanceof Error ? error.message : 'An unexpected error occurred')
       }
     },
   })
@@ -122,9 +104,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-xl">Create your account</CardTitle>
-        <CardDescription>
-          Enter your information to create a new account
-        </CardDescription>
+        <CardDescription>Enter your information to create a new account</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -146,8 +126,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             <form.Field
               name="name"
               children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Full Name</FieldLabel>
@@ -161,9 +140,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                       aria-invalid={isInvalid}
                       placeholder="Enter your full name"
                     />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 )
               }}
@@ -172,8 +149,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             <form.Field
               name="username"
               children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Username</FieldLabel>
@@ -187,9 +163,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                       aria-invalid={isInvalid}
                       placeholder="Choose a username"
                     />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 )
               }}
@@ -198,8 +172,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             <form.Field
               name="email"
               children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -213,9 +186,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                       aria-invalid={isInvalid}
                       placeholder="Enter your email"
                     />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 )
               }}
@@ -225,8 +196,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
               <form.Field
                 name="password"
                 children={(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                   return (
                     <Field data-invalid={isInvalid}>
                       <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -240,9 +210,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                         aria-invalid={isInvalid}
                         placeholder="Create a password"
                       />
-                      {isInvalid && (
-                        <FieldError errors={field.state.meta.errors} />
-                      )}
+                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
                     </Field>
                   )
                 }}
@@ -250,13 +218,10 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
               <form.Field
                 name="confirmPassword"
                 children={(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                   return (
                     <Field data-invalid={isInvalid}>
-                      <FieldLabel htmlFor={field.name}>
-                        Confirm Password
-                      </FieldLabel>
+                      <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
                       <Input
                         id={field.name}
                         name={field.name}
@@ -267,9 +232,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                         aria-invalid={isInvalid}
                         placeholder="Confirm your password"
                       />
-                      {isInvalid && (
-                        <FieldError errors={field.state.meta.errors} />
-                      )}
+                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
                     </Field>
                   )
                 }}
@@ -280,16 +243,9 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </CardContent>
       <CardFooter className="flex-col">
         <Field orientation="vertical">
-          <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
-          >
+          <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
             {([canSubmit, isSubmitting]) => (
-              <Button
-                type="submit"
-                className="flex-1"
-                disabled={!canSubmit}
-                form="signup-form"
-              >
+              <Button type="submit" className="flex-1" disabled={!canSubmit} form="signup-form">
                 {isSubmitting ? 'Creating account...' : 'Create Account'}
               </Button>
             )}

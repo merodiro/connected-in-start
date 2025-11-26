@@ -1,8 +1,4 @@
-import {
-  type RankingInfo,
-  compareItems,
-  rankItem,
-} from '@tanstack/match-sorter-utils'
+import { type RankingInfo, compareItems, rankItem } from '@tanstack/match-sorter-utils'
 import { createFileRoute } from '@tanstack/react-router'
 import {
   type Column,
@@ -157,11 +153,7 @@ function TableDemo() {
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <th
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      className="px-4 py-3 text-left"
-                    >
+                    <th key={header.id} colSpan={header.colSpan} className="px-4 py-3 text-left">
                       {header.isPlaceholder ? null : (
                         <>
                           <div
@@ -172,10 +164,7 @@ function TableDemo() {
                               onClick: header.column.getToggleSortingHandler(),
                             }}
                           >
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
+                            {flexRender(header.column.columnDef.header, header.getContext())}
                             {{
                               asc: ' 🔼',
                               desc: ' 🔽',
@@ -197,17 +186,11 @@ function TableDemo() {
           <tbody className="divide-y divide-gray-700">
             {table.getRowModel().rows.map((row) => {
               return (
-                <tr
-                  key={row.id}
-                  className="hover:bg-gray-800 transition-colors"
-                >
+                <tr key={row.id} className="hover:bg-gray-800 transition-colors">
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td key={cell.id} className="px-4 py-3">
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
                     )
                   })}
@@ -250,8 +233,7 @@ function TableDemo() {
         <span className="flex items-center gap-1">
           <div>Page</div>
           <strong>
-            {table.getState().pagination.pageIndex + 1} of{' '}
-            {table.getPageCount()}
+            {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
           </strong>
         </span>
         <span className="flex items-center gap-1">
@@ -280,9 +262,7 @@ function TableDemo() {
           ))}
         </select>
       </div>
-      <div className="mt-4 text-gray-400">
-        {table.getPrePaginationRowModel().rows.length} Rows
-      </div>
+      <div className="mt-4 text-gray-400">{table.getPrePaginationRowModel().rows.length} Rows</div>
       <div className="mt-4 flex gap-2">
         <button
           onClick={() => rerender()}
@@ -350,11 +330,5 @@ function DebouncedInput({
     return () => clearTimeout(timeout)
   }, [value])
 
-  return (
-    <input
-      {...props}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  )
+  return <input {...props} value={value} onChange={(e) => setValue(e.target.value)} />
 }

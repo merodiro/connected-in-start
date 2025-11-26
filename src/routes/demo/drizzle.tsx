@@ -51,8 +51,7 @@ function DemoDrizzle() {
     <div
       className="flex items-center justify-center min-h-screen p-4 text-white"
       style={{
-        background:
-          'linear-gradient(135deg, #0c1a2b 0%, #1a2332 50%, #16202e 100%)',
+        background: 'linear-gradient(135deg, #0c1a2b 0%, #1a2332 50%, #16202e 100%)',
       }}
     >
       <div
@@ -108,9 +107,7 @@ function DemoDrizzle() {
             </li>
           ))}
           {todos.length === 0 && (
-            <li className="text-center py-8 text-indigo-300/70">
-              No todos yet. Create one below!
-            </li>
+            <li className="text-center py-8 text-indigo-300/70">No todos yet. Create one below!</li>
           )}
         </ul>
 
@@ -145,9 +142,7 @@ function DemoDrizzle() {
             borderColor: 'rgba(93, 103, 227, 0.2)',
           }}
         >
-          <h3 className="text-lg font-semibold mb-2 text-indigo-200">
-            Powered by Drizzle ORM
-          </h3>
+          <h3 className="text-lg font-semibold mb-2 text-indigo-200">Powered by Drizzle ORM</h3>
           <p className="text-sm text-indigo-300/80 mb-4">
             Next-generation ORM for Node.js & TypeScript with PostgreSQL
           </p>
@@ -156,9 +151,7 @@ function DemoDrizzle() {
             <ol className="list-decimal list-inside space-y-2 text-indigo-300/80">
               <li>
                 Configure your{' '}
-                <code className="px-2 py-1 rounded bg-black/30 text-purple-300">
-                  DATABASE_URL
-                </code>{' '}
+                <code className="px-2 py-1 rounded bg-black/30 text-purple-300">DATABASE_URL</code>{' '}
                 in .env.local
               </li>
               <li>

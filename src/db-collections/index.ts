@@ -1,7 +1,4 @@
-import {
-  createCollection,
-  localOnlyCollectionOptions,
-} from '@tanstack/react-db'
+import { createCollection, localOnlyCollectionOptions } from '@tanstack/react-db'
 import * as z from 'zod'
 
 const MessageSchema = z.object({

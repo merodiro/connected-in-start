@@ -13,19 +13,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { authClient } from '@/lib/auth-client'
 
 const forgotPasswordSchema = z.object({
-  email: z
-    .email({ message: 'Invalid email address' })
-    .min(1, { message: 'Email is required' }),
+  email: z.email({ message: 'Invalid email address' }).min(1, { message: 'Email is required' }),
 })
 
 type ForgotPasswordFormProps = {
@@ -33,10 +26,7 @@ type ForgotPasswordFormProps = {
   onBackToLogin?: () => void
 }
 
-export function ForgotPasswordForm({
-  onSuccess,
-  onBackToLogin,
-}: ForgotPasswordFormProps) {
+export function ForgotPasswordForm({ onSuccess, onBackToLogin }: ForgotPasswordFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
 
@@ -53,7 +43,7 @@ export function ForgotPasswordForm({
       setSuccess(false)
 
       try {
-        const result = await authClient.forgetPassword({
+        const result = await authClient.requestPasswordReset({
           email: value.email,
           redirectTo: '/reset-password',
         })
@@ -67,11 +57,7 @@ export function ForgotPasswordForm({
           }, 2000)
         }
       } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred',
-        )
+        setError(error instanceof Error ? error.message : 'An unexpected error occurred')
       }
     },
   })
@@ -90,12 +76,7 @@ export function ForgotPasswordForm({
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              onClick={onBackToLogin}
-            >
+            <Button type="button" variant="outline" className="w-full" onClick={onBackToLogin}>
               Back to login
             </Button>
           </CardFooter>
@@ -110,8 +91,7 @@ export function ForgotPasswordForm({
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Reset your password</CardTitle>
           <CardDescription>
-            Enter your email address and we'll send you a link to reset your
-            password.
+            Enter your email address and we'll send you a link to reset your password.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -134,8 +114,7 @@ export function ForgotPasswordForm({
               <form.Field
                 name="email"
                 children={(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                   return (
                     <Field data-invalid={isInvalid}>
                       <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -149,9 +128,7 @@ export function ForgotPasswordForm({
                         aria-invalid={isInvalid}
                         placeholder="Enter your email"
                       />
-                      {isInvalid && (
-                        <FieldError errors={field.state.meta.errors} />
-                      )}
+                      {isInvalid && <FieldError errors={field.state.meta.errors} />}
                     </Field>
                   )
                 }}
@@ -161,9 +138,7 @@ export function ForgotPasswordForm({
         </CardContent>
         <CardFooter className="flex-col">
           <Field orientation="vertical">
-            <form.Subscribe
-              selector={(state) => [state.canSubmit, state.isSubmitting]}
-            >
+            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
               {([canSubmit, isSubmitting]) => (
                 <Button
                   type="submit"
@@ -176,12 +151,7 @@ export function ForgotPasswordForm({
               )}
             </form.Subscribe>
             {onBackToLogin && (
-              <Button
-                type="button"
-                variant="link"
-                className="w-full"
-                onClick={onBackToLogin}
-              >
+              <Button type="button" variant="link" className="w-full" onClick={onBackToLogin}>
                 Back to login
               </Button>
             )}

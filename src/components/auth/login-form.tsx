@@ -13,13 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { authClient } from '@/lib/auth-client'
 
@@ -28,9 +22,7 @@ const loginSchema = z.object({
     .string()
     .nonempty({ message: 'Email or username is required' })
     .min(3, { message: 'Email or username must be at least 3 characters' }),
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters' }),
+  password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
 })
 
 type LoginFormProps = {
@@ -39,11 +31,7 @@ type LoginFormProps = {
   onForgotPassword?: () => void
 }
 
-export function LoginForm({
-  onSuccess,
-  onSwitchToSignup,
-  onForgotPassword,
-}: LoginFormProps) {
+export function LoginForm({ onSuccess, onSwitchToSignup, onForgotPassword }: LoginFormProps) {
   const [error, setError] = useState<string | null>(null)
 
   const form = useForm({
@@ -77,11 +65,7 @@ export function LoginForm({
           onSuccess?.()
         }
       } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred',
-        )
+        setError(error instanceof Error ? error.message : 'An unexpected error occurred')
       }
     },
   })
@@ -90,9 +74,7 @@ export function LoginForm({
     <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-xl">Welcome back</CardTitle>
-        <CardDescription>
-          Enter your email or username and password to sign in
-        </CardDescription>
+        <CardDescription>Enter your email or username and password to sign in</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -114,13 +96,10 @@ export function LoginForm({
             <form.Field
               name="emailOrUsername"
               children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
-                      Email or Username
-                    </FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Email or Username</FieldLabel>
                     <Input
                       id={field.name}
                       type="text"
@@ -131,9 +110,7 @@ export function LoginForm({
                       aria-invalid={isInvalid}
                       placeholder="Enter your email or username"
                     />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 )
               }}
@@ -142,8 +119,7 @@ export function LoginForm({
             <form.Field
               name="password"
               children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <div className="flex items-center">
@@ -168,9 +144,7 @@ export function LoginForm({
                       aria-invalid={isInvalid}
                       placeholder="Enter your password"
                     />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 )
               }}
@@ -180,16 +154,9 @@ export function LoginForm({
       </CardContent>
       <CardFooter className="flex-col">
         <Field orientation="vertical">
-          <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
-          >
+          <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
             {([canSubmit, isSubmitting]) => (
-              <Button
-                type="submit"
-                className="flex-1"
-                disabled={!canSubmit}
-                form="login-form"
-              >
+              <Button type="submit" className="flex-1" disabled={!canSubmit} form="login-form">
                 {isSubmitting ? 'Signing in...' : 'Sign In'}
               </Button>
             )}

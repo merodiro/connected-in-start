@@ -1,12 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useSession } from '@/lib/auth-client'
 
 export const Route = createFileRoute('/')({
@@ -30,9 +24,7 @@ function Dashboard() {
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle>Welcome</CardTitle>
-            <CardDescription>
-              Please sign in to access your dashboard
-            </CardDescription>
+            <CardDescription>Please sign in to access your dashboard</CardDescription>
           </CardHeader>
           <CardContent>
             <a
@@ -51,9 +43,7 @@ function Dashboard() {
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground">
-            Welcome back, {session.user.name}!
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground">Welcome back, {session.user.name}!</h1>
           <p className="text-muted-foreground mt-2">
             You're successfully authenticated with better-auth
           </p>

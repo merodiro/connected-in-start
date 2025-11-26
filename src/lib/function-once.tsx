@@ -7,9 +7,5 @@ export function FunctionOnce<T = unknown>({
   children: (param: T) => unknown
   param?: T
 }) {
-  return (
-    <ScriptOnce>
-      {`(${children.toString()})(${JSON.stringify(param)})`}
-    </ScriptOnce>
-  )
+  return <ScriptOnce>{`(${children.toString()})(${JSON.stringify(param)})`}</ScriptOnce>
 }

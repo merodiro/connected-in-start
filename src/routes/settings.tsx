@@ -1,12 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useSession } from '@/lib/auth-client'
 
 export const Route = createFileRoute('/settings')({
@@ -50,51 +44,33 @@ function Settings() {
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600 mt-2">
-            Manage your account settings and preferences
-          </p>
+          <p className="text-gray-600 mt-2">Manage your account settings and preferences</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Profile Information</CardTitle>
-              <CardDescription>
-                Update your personal information
-              </CardDescription>
+              <CardDescription>Update your personal information</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-                  <p className="mt-1 text-sm text-gray-900">
-                    {session.user.name}
-                  </p>
+                  <label className="text-sm font-medium text-gray-700">Name</label>
+                  <p className="mt-1 text-sm text-gray-900">{session.user.name}</p>
                 </div>
                 {session.user.username && (
                   <div>
-                    <label className="text-sm font-medium text-gray-700">
-                      Username
-                    </label>
-                    <p className="mt-1 text-sm text-gray-900">
-                      @{session.user.username}
-                    </p>
+                    <label className="text-sm font-medium text-gray-700">Username</label>
+                    <p className="mt-1 text-sm text-gray-900">@{session.user.username}</p>
                   </div>
                 )}
                 <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <p className="mt-1 text-sm text-gray-900">
-                    {session.user.email}
-                  </p>
+                  <label className="text-sm font-medium text-gray-700">Email</label>
+                  <p className="mt-1 text-sm text-gray-900">{session.user.email}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Email Verified
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Email Verified</label>
                   <p className="mt-1 text-sm text-gray-900">
                     {session.user.emailVerified ? 'Yes ✓' : 'No'}
                   </p>
@@ -106,22 +82,16 @@ function Settings() {
           <Card>
             <CardHeader>
               <CardTitle>Account Security</CardTitle>
-              <CardDescription>
-                Manage your account security settings
-              </CardDescription>
+              <CardDescription>Manage your account security settings</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Account Status
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Account Status</label>
                   <p className="mt-1 text-sm text-gray-900">Active</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">
-                    Member Since
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Member Since</label>
                   <p className="mt-1 text-sm text-gray-900">
                     {new Date(session.user.createdAt).toLocaleDateString()}
                   </p>

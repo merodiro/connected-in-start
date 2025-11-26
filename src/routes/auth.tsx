@@ -30,10 +30,7 @@ function AuthComponent() {
       }
       case 'signup': {
         return (
-          <SignupForm
-            onSuccess={handleSuccess}
-            onSwitchToLogin={() => setCurrentView('login')}
-          />
+          <SignupForm onSuccess={handleSuccess} onSwitchToLogin={() => setCurrentView('login')} />
         )
       }
       case 'forgot-password': {

@@ -15,7 +15,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import ts from 'typescript-eslint'
 
 export default defineConfig(
-  globalIgnores(['**/routeTree.gen.ts']),
+  globalIgnores(['**/routeTree.gen.ts', 'dist/**']),
   {
     extends: [
       js.configs.recommended,
@@ -48,18 +48,9 @@ export default defineConfig(
         'error',
         { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
       ],
-      '@typescript-eslint/no-inferrable-types': [
-        'error',
-        { ignoreParameters: true },
-      ],
-      '@typescript-eslint/no-confusing-void-expression': [
-        'error',
-        { ignoreArrowShorthand: true },
-      ],
-      '@typescript-eslint/restrict-template-expressions': [
-        'error',
-        { allowNumber: true },
-      ],
+      '@typescript-eslint/no-inferrable-types': ['error', { ignoreParameters: true }],
+      '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
+      '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
