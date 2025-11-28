@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@tarquinen/opencode-dcp"],
   "mcp": {
     "context7": {
       "type": "remote",
@@ -48,7 +49,10 @@
     "Better Auth": {
       "type": "remote",
       "url": "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp",
-      "enabled": true,
+    },
+    "zod": {
+      "type": "remote",
+      "url": "https://mcp.inkeep.com/zod/mcp",
     },
   },
   "permission": {
