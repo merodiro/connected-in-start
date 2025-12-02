@@ -1,5 +1,4 @@
 [tools]
-node = "24"
+node = "lts"
 "npm:@antfu/ni" = "latest"
-opencode = "latest"
 uv = "latest"
